@@ -50,10 +50,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .build("/test/activity2")
                         .navigation();
                 break;
+            case R.id.normalNavigation2:
+                ARouter.getInstance()
+                        .build("/test/activity2")
+                        .navigation(this, 666);//for result
+                break;
             case R.id.normalNavigationWithParams:
                 ARouter.getInstance()
                         .build("/test/activity2")
-                        .withString("key1", "value1")
+                        .withString("key1", "value1")//with params
                         .navigation();
                 break;
             case R.id.interceptor:
@@ -64,16 +69,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.navByUrl:
                 ARouter.getInstance()
                         .build("/test/webview")
-                        .withString("url", "file:///android_asset/schame-test.html")
+                        .withString("url", /*"file:///android_asset/schame-test.html"*/"http://www.sogou.com")
                         .navigation();
                 break;
-            case R.id.autoInject:
+            case R.id.autoInject://Activity中的属性，将会由ARouter自动注入，无需 getIntent().getStringExtra("xxx")等等
                 ARouter.enableAutoInject();
                 break;
-            case R.id.navByName:
+            case R.id.navByName://根据router跳转
                 ((HelloService) ARouter.getInstance().build("/service/hello").navigation()).sayHello("mike");
                 break;
-            case R.id.navByType:
+            case R.id.navByType://无需强转
                 ARouter.getInstance().navigation(HelloService.class).sayHello("mike");
                 break;
             case R.id.navToMoudle1:
@@ -95,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onLost(Postcard postcard) {
-                        Log.d("ARouter", "找不到了");
+                        Log.e("ARouter", "找不到了");
                     }
                 });
                 break;
@@ -104,11 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.failNav3:
                 ARouter.getInstance().navigation(MainActivity.class);
-                break;
-            case R.id.normalNavigation2:
-                ARouter.getInstance()
-                        .build("/test/activity2")
-                        .navigation(this, 666);
                 break;
             default:
                 break;

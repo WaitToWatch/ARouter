@@ -9,11 +9,11 @@ import com.alibaba.android.arouter.demo.R;
 import com.alibaba.android.arouter.facade.annotation.Param;
 import com.alibaba.android.arouter.facade.annotation.Route;
 
-@Route(path = "/test/activity2")
+@Route(path = "/test/activity2")//router 的定义
 public class Test2Activity extends AppCompatActivity {
 
-    @Param
-    private String key1;
+//    @Param
+//    private String key1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
